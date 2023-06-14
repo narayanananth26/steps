@@ -24,9 +24,15 @@ export default function App() {
 
 	return (
 		<>
-			<button className="close" onClick={handleClose}>
-				&times;
-			</button>
+			{isOpen ? (
+				<button className="close" onClick={handleClose}>
+					&times;
+				</button>
+			) : (
+				<button className="close" onClick={handleClose}>
+					&#43;
+				</button>
+			)}
 			{isOpen && (
 				<div className="steps">
 					<div className="numbers">
@@ -39,35 +45,37 @@ export default function App() {
 					</p>
 
 					<div className="buttons">
-						<button
-							style={
-								step > 1
-									? {
-											backgroundColor: "#7950f2",
-											color: "fff",
-									  }
-									: { cursor: "default" }
-							}
+						<Button
+							bgColor="#7950f2"
+							textColor="#fff"
 							onClick={handlePrevious}
 						>
 							Previous
-						</button>
-						<button
-							style={
-								step < 3
-									? {
-											backgroundColor: "#7950f2",
-											color: "fff",
-									  }
-									: { cursor: "default" }
-							}
+						</Button>
+						<Button
+							bgColor="#7950f2"
+							textColor="#fff"
 							onClick={handleNext}
 						>
 							Next
-						</button>
+						</Button>
 					</div>
 				</div>
 			)}
 		</>
+	);
+}
+
+function Button({ textColor, bgColor, onClick, children }) {
+	return (
+		<button
+			style={{
+				backgroundColor: bgColor,
+				color: textColor,
+			}}
+			onClick={onClick}
+		>
+			{children}
+		</button>
 	);
 }
